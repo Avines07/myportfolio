@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arjun | Software Developer</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Your Custom CSS -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<!-- Bootstrap Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="mainNavbar">
+  <div class="container">
+    <a class="navbar-brand text-primary" href="#">Avineswaran</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+  <ul class="navbar-nav">
+    <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
+    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+  </ul>
+  <!-- Toggle inside collapse -->
+  <button class="btn btn-primary ms-3 mt-2 mt-lg-0" id="toggleTheme">Toggle</button>
+</div>
+ </div>
+</nav>
+
+<!-- Header -->
+<header>
+<div class="text-center">
+<h1>Hi, I'm Avineswaran</h1>
+<h2 class="typing"></h2>
+<a href="resume.pdf" download class="btn">Download Resume</a>
+<a href="#contact" class="btn">Hire Me</a>
+</div>
+</header>
+
+<!-- About Section -->
+<section id="about">
+<h2>About Me</h2>
+<div class="cardreveal">
+I am a B.Sc. Computer Science graduate with a strong foundation in Java, Spring Boot, MySQL, HTML, CSS, and JavaScript. I am passionate about developing efficient and scalable software solutions. As a fresher, I am eager to learn, adapt, and contribute to innovative IT projects while growing professionally in a dynamic environment.
+</div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills">
+<h2>Technical Skills</h2>
+<div class="skills card reveal">
+<div class="skill">Java<div class="bar"><div class="progress" data-width="90%"></div></div></div>
+<div class="skill">Spring Boot<div class="bar"><div class="progress" data-width="85%"></div></div></div>
+<div class="skill">MySQL<div class="bar"><div class="progress" data-width="80%"></div></div></div>
+<div class="skill">HTML/CSS<div class="bar"><div class="progress" data-width="95%"></div></div></div>
+<div class="skill">JavaScript<div class="bar"><div class="progress" data-width="85%"></div></div></div>
+</div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects">
+<h2>Projects</h2>
+<div class="projects card reveal">
+<div class="project">
+<h3>Library Management System</h3>
+<p>Spring Boot + MySQL backend web app.</p>
+<a href="https://github.com/yourusername/library-management" target="_blank">GitHub Link</a>
+</div>
+<div class="project">
+<h3>Student Result Management</h3>
+<p>Java + JDBC desktop app.</p>
+<a href="https://github.com/yourusername/student-result" target="_blank">GitHub Link</a>
+</div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+<h2>Contact Me</h2>
+<div class="cardreveal">
+<form id="contactForm" method="POST" action="http://localhost:8080/contact">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" rows="4" placeholder="Message"></textarea>
+<button type="submit">Send Message</button>
+</form>
+<p id="responseMsg" style="margin-top:10px;"></p>
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+© 2026 Arjun | IT Placement Portfolio
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script>
+// Dark/Light toggle for body + navbar
+const toggleBtn = document.getElementById('toggleTheme');
+toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    const navbar = document.getElementById('mainNavbar');
+    navbar.classList.toggle('navbar-light');
+    navbar.classList.toggle('bg-light');
+    navbar.classList.toggle('navbar-dark');
+    navbar.classList.toggle('bg-dark');
+});
+
+// Typing effect
+const text=["Software Developer","Java Backend Developer","IT Fresher"];
+let i=0,j=0,current="",isDeleting=false;
+function type(){
+const typing=document.querySelector(".typing");
+if(i<text.length){
+if(!isDeleting&&j<=text[i].length){current=text[i].substring(0,j++);}
+else if(isDeleting&&j>=0){current=text[i].substring(0,j--);}
+typing.textContent=current;
+if(j===text[i].length) isDeleting=true;
+if(j===0&&isDeleting){isDeleting=false;i++;}
+}else{i=0;}
+setTimeout(type,100);
+}
+type();
+
+// Scroll reveal & progress bars
+window.addEventListener("scroll",()=>{
+document.querySelectorAll(".reveal").forEach(el=>{
+if(el.getBoundingClientRect().top<window.innerHeight-100){
+el.classList.add("show");
+el.querySelectorAll(".progress").forEach(p=>{p.style.width=p.dataset.width;});
+}
+});
+
+// Section highlight scroll
+const sections=document.querySelectorAll("section");
+const navLinks=document.querySelectorAll("nav a");
+sections.forEach(sec=>{
+const top=sec.getBoundingClientRect().top;
+const id=sec.getAttribute("id");
+if(top<150 && top>-sec.offsetHeight+150){
+navLinks.forEach(a=>a.classList.remove("active"));
+document.querySelector(`nav a[href="#${id}"]`).classList.add("active");
+}
+});
+});
+
+// Contact form submit
+const form=document.getElementById("contactForm");
+form.addEventListener("submit", async e=>{
+e.preventDefault();
+const data={name:form.name.value,email:form.email.value,message:form.message.value};
+await fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+document.getElementById("responseMsg").textContent="Message sent successfully!";
+form.reset();
+});
+</script>
+</body>
+</html>

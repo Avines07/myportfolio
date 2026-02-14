@@ -1,0 +1,277 @@
+/* =========================
+   Root variables
+========================= */
+:root{
+  --bg:#0f172a;
+  --text:#fff;
+  --card-bg:rgba(255,255,255,0.08);
+  --primary:#3b82f6;
+  --glass-blur:12px;
+}
+.light{
+  --bg:#f8fafc;
+  --text:#0f172a;
+  --card-bg:rgba(255,255,255,0.05);
+}
+
+/* =========================
+   Global styles
+========================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+  scroll-behavior:smooth;
+  transition:0.4s;
+}
+body{
+  background:var(--bg);
+  color:var(--text);
+}
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* =========================
+   Bootstrap Navbar Fix
+========================= */
+#mainNavbar.navbar-dark { background-color: rgba(15,23,42,0.9) !important; }
+#mainNavbar.navbar-light { background-color: rgba(248,250,252,0.95) !important; }
+#mainNavbar .nav-link { transition: 0.3s; }
+#mainNavbar .nav-link:hover { color: var(--primary) !important; }
+
+/* =========================
+   Toggle Button
+========================= */
+.toggle-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:var(--primary);
+  border:none;
+  padding:10px 15px;
+  border-radius:20px;
+  color:white;
+  cursor:pointer;
+  z-index:1100;
+}
+
+/* Default position - desktop */
+.toggle-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:1100;
+}
+
+/* Mobile responsive - move toggle below navbar */
+@media(max-width:768px){
+  .toggle-btn{
+    position:relative; /* make it part of the navbar container flow */
+    top:auto;
+    right:auto;
+    margin:10px auto;
+    display:block;
+  }
+}
+
+
+.btn{
+  display:inline-block;
+  padding:10px 20px;
+  background:var(--primary);
+  color:white;
+  border-radius:25px;
+  margin:10px;
+  transition:0.3s;
+}
+.btn:hover{ transform:scale(1.05); }
+
+/* =========================
+   Header
+========================= */
+header{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+}
+header h1{ font-size:2.5rem; }
+.typing{ color:var(--primary); font-weight:bold; }
+
+/* =========================
+   Sections
+========================= */
+section{
+  padding:80px 8%;
+  scroll-margin-top:80px;
+}
+h2{
+  text-align:center;
+  margin-bottom:40px;
+  color:var(--primary);
+}
+
+/* =========================
+   Glass UI Cards
+========================= */
+.card{
+  background:var(--card-bg);
+  backdrop-filter:blur(var(--glass-blur));
+  border-radius:20px;
+  padding:25px;
+  margin-bottom:20px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.6s, transform 0.3s ease-in-out;
+}
+.card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* =========================
+   Skills & Progress Bars
+========================= */
+.skills .skill{ margin-bottom:15px; }
+.bar{
+  height:10px;
+  background:#334155;
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress{
+  height:100%;
+  background:var(--primary);
+  width:0;
+  transition:1.5s;
+}
+.skills.card {
+    background: rgba(15,23,42,0.9); /* darker glass background */
+    color: var(--text); /* ensure text uses main text color */
+}
+.skills .skill {
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.skills .bar {
+    height: 12px;
+    background: #334155; /* dark track */
+    border-radius: 10px;
+    overflow: hidden;
+}
+.skills .progress {
+    height: 100%;
+    background: var(--primary); /* bright blue bar */
+    width: 0; /* animated via JS */
+    transition: 1.5s;
+}
+.skills .skill:hover {
+    color: var(--primary);
+}
+
+
+/* =========================
+   Projects Section
+========================= */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+/* Individual Project */
+.projects .project h3{
+  color:var(--text);
+  font-size:1.3rem;
+  font-weight:600;
+  margin-bottom:5px;
+}
+.projects .project p{
+  color:var(--text);
+  opacity:1;
+  margin-bottom:8px;
+}
+.projects .project a{
+  color:var(--primary);
+  text-decoration:underline;
+  font-weight:500;
+  transition:0.3s;
+}
+.projects .project a:hover{
+  color:#0284c7;
+}
+
+/* =========================
+   Contact Form
+========================= */
+form input, form textarea{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:none;
+}
+form button{
+  width:100%;
+  padding:10px;
+  border:none;
+  background:var(--primary);
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
+}
+form button:hover{ transform:scale(1.05); }
+
+/* =========================
+   Admin Table
+========================= */
+.table-container{ overflow-x:auto; }
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:600px;
+}
+th,td{
+  padding:15px;
+  border-bottom:1px solid rgba(255,255,255,0.3);
+  text-align:left;
+  backdrop-filter:blur(var(--glass-blur));
+  background:var(--card-bg);
+  border-radius:12px;
+  transition:0.3s, transform 0.3s ease-in-out;
+}
+tr:hover td{
+  transform:scale(1.02);
+  box-shadow:0 6px 20px rgba(0,0,0,0.3);
+}
+th{ color:var(--primary); }
+
+/* =========================
+   Footer
+========================= */
+footer{
+  text-align:center;
+  padding:20px;
+  color:var(--primary);
+}
+
+/* =========================
+   Responsive
+========================= */
+@media(max-width:768px){
+  th,td{ padding:10px; }
+}
+@media(max-width:600px){
+  header h1{ font-size:1.8rem; }
+}

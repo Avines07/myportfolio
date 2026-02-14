@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | Portfolio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<button class="toggle-btn" onclick="document.body.classList.toggle('light')">Toggle</button>
+<h1>Admin Panel - Messages</h1>
+<div class="table-container">
+<table>
+<thead>
+<tr><th>ID</th><th>Name</th><th>Email</th><th>Message</th><th>Time</th></tr>
+</thead>
+<tbody id="messagesTable"></tbody>
+</table>
+</div>
+
+<script>
+async function loadMessages(){
+  try{
+    const res=await fetch('http://localhost:8080/messages');
+    const data=await res.json();
+    const table=document.getElementById('messagesTable');
+    table.innerHTML="";
+    data.forEach(msg=>{
+      const row=document.createElement('tr');
+      row.innerHTML=`<td>${msg.id}</td><td>${msg.name}</td><td>${msg.email}</td><td>${msg.message}</td><td>${new Date(msg.createdAt).toLocaleString()}</td>`;
+      table.appendChild(row);
+    });
+  }catch(err){console.error(err);}
+}
+loadMessages();
+setInterval(loadMessages,5000);
+</script>
+</body>
+</html>
